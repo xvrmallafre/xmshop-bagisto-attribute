@@ -1,0 +1,28 @@
+{
+    "name": "xmshop/bagisto-attribute",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Xavier Mallafré",
+            "email": "xvrmallafre@gmail.com"
+        }
+    ],
+    "require": {
+        "bagisto/laravel-attribute": "dev-master",
+        "bagisto/laravel-product": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "XMShop\\Attribute\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "XMShop\\Attribute\\Providers\\AttributeServiceProvider"
+            ],
+            "aliases": { }
+        }
+    },
+    "minimum-stability": "dev"
+}
