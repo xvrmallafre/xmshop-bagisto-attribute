@@ -1,9 +1,9 @@
 <?php
+
 namespace XMShop\Attribute\Providers;
 
-use Webkul\Product\Models\Product;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Webkul\Product\Models\Product;
 use XMShop\Attribute\Console\Commands\ClearAll;
 use XMShop\Attribute\Models\Product as XMSProduct;
 
@@ -26,17 +26,12 @@ class AttributeServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
         // Cargamos las vistas de nuestro paquete
-        // TODO: Sobrescribir la ruta, por algun motivo causa el error: Trying to access array offset on null
-        // TODO: Es posible que sea debido a como extendía el controlador, el constructor no estaba definido, y
-        // TODO: puede que al no hacerlo, al llamar al metodo download faltase alguna dependencia
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'XMShop');
-        Route::middleware('web')
-            ->namespace('XMShop\Attribute\Http\Controllers')
-            ->group(__DIR__ . '/../Routes/web.php');
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'XMShop');
+        // TODO: mirar como sobrescribir correctamente el controlador para procesar la información de los atributos personalizados
 
         // Sobrescritura de archivos de la vista de productos del admin
         $this->publishes([
-            __DIR__ . '/../Resources/views/admin/catalog/products/edit.blade.php' => resource_path('views/admin/catalog/products/edit.blade.php'),
+            __DIR__.'/../Resources/views/admin/catalog/products/edit.blade.php' => resource_path('views/admin/catalog/products/edit.blade.php'),
         ]);
     }
 
@@ -46,6 +41,6 @@ class AttributeServiceProvider extends ServiceProvider
     public function register()
     {
         // Sobrescribimos el modelo de producto
-        $this->app->bind(Product::class, XMSProduct::class);
+        //$this->app->bind(Product::class, XMSProduct::class);
     }
 }
